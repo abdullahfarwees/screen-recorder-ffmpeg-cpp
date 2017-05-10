@@ -4,7 +4,7 @@ Screen recorder applications was developed using C++ FFMPEG library. Screen reco
 
 > **Note:**
 
-> - To use this application , libavcodec , libavformat , x11grab , ffmpeg libraries must be installed in ubuntu based computer. check [here][1] for installation procedure.
+> - To use this application , libavcodec , libavformat , x11grab , ffmpeg libraries must be installed in ubuntu based computer. check [here][1] ffmpeg for installation procedure.
 > - To stop the application , toggle <kbd>Ctrl+C</kbd> .
 
 ----------
