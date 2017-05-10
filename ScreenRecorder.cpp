@@ -1,7 +1,7 @@
 #include "ScreenRecorder.h"
 
 using namespace std;
-
+/* initialize the sources*/
 ScreenRecorder::ScreenRecorder()
 {
 	cout<<"\n\n Registering required functions...";
@@ -11,6 +11,7 @@ ScreenRecorder::ScreenRecorder()
 	cout<<"\n\n Registered successfully...";
 }
 
+/* uninitialize the sources */
 ScreenRecorder::~ScreenRecorder()
 {
 
@@ -40,6 +41,7 @@ cout<<endl;
 cout<<endl;
 }
 
+/*  */
 int ScreenRecorder::collectFrames()
 {
 	int flag;
@@ -159,6 +161,7 @@ av_free(video_outbuf);
 
 }
 
+/*  */
 int ScreenRecorder::openCamera()
 {
 
