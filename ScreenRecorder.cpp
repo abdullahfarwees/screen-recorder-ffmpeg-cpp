@@ -1,6 +1,7 @@
 #include "ScreenRecorder.h"
 
 using namespace std;
+
 /* initialize the sources*/
 ScreenRecorder::ScreenRecorder()
 {
@@ -161,7 +162,7 @@ av_free(video_outbuf);
 
 }
 
-/*  */
+/* establishing the connection between camera or screen through its respective folder */
 int ScreenRecorder::openCamera()
 {
 
@@ -171,19 +172,21 @@ int ScreenRecorder::openCamera()
 
 	pAVFormatContext = avformat_alloc_context();//Allocate an AVFormatContext.
 
+	/* current below is for screen recording. to connect with camera use v4l2 as a input parameter for av_find_input_format */ 
 	pAVInputFormat = av_find_input_format("x11grab");
-  value = avformat_open_input(&pAVFormatContext, ":0.0+10,250", pAVInputFormat, NULL);
+  	value = avformat_open_input(&pAVFormatContext, ":0.0+10,250", pAVInputFormat, NULL);
 	if(value != 0)
 	{
 	   cout<<"\n\nError : avformat_open_input\n\nstopped...";
 	   return -1;
 	}
 
+	/* set frame per second */
 	value = av_dict_set( &options,"framerate","30",0 );
 	if(value < 0)
 	{
 	  cout<<"\n\nError : av_dict_set(framerate , 30 , 0)";
-    return -1;
+    	  return -1;
 	}
 
 	value = av_dict_set( &options, "preset", "medium", 0 );
@@ -202,6 +205,7 @@ int ScreenRecorder::openCamera()
 
 	VideoStreamIndx = -1;
 
+	/* find the first video stream index . Also there is an API available to do the below operations */
 	for(int i = 0; i < pAVFormatContext->nb_streams; i++ ) // find video stream posistion/index.
 	{
 	  if( pAVFormatContext->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO )
@@ -210,7 +214,7 @@ int ScreenRecorder::openCamera()
 	     break;
 	  }
 
-	} // End for-loop
+	} 
 
 	if( VideoStreamIndx == -1)
 	{
@@ -236,6 +240,7 @@ int ScreenRecorder::openCamera()
 	}
 }
 
+/* initialize the video output file and its properties  */
 int ScreenRecorder::init_outputfile()
 {
 	outAVFormatContext = NULL;
@@ -249,8 +254,7 @@ int ScreenRecorder::init_outputfile()
 	  return -1;
 	}
 
-/*Returns the output format in the list of registered output formats which best matches the provided parameters, or returns NULL if there is no match.
-*/
+/* Returns the output format in the list of registered output formats which best matches the provided parameters, or returns NULL if there is no match. */
 	output_format = av_guess_format(NULL, output_file ,NULL);
 	if( !output_format )
 	{
@@ -272,6 +276,7 @@ int ScreenRecorder::init_outputfile()
 	  return -1;
 	}
 
+	/* set property of the video file */
 	outAVCodecContext = video_st->codec;
 	outAVCodecContext->codec_id = AV_CODEC_ID_MPEG4;// AV_CODEC_ID_MPEG4; // AV_CODEC_ID_H264 // AV_CODEC_ID_MPEG1VIDEO
 	outAVCodecContext->codec_type = AVMEDIA_TYPE_VIDEO;
@@ -296,8 +301,8 @@ int ScreenRecorder::init_outputfile()
 	 return -1;
 	}
 
-// Some container formats (like MP4) require global headers to be present
-// Mark the encoder so that it behaves accordingly.
+	/* Some container formats (like MP4) require global headers to be present
+	   Mark the encoder so that it behaves accordingly. */
 
 	if ( outAVFormatContext->oformat->flags & AVFMT_GLOBALHEADER)
 	{
@@ -311,6 +316,7 @@ int ScreenRecorder::init_outputfile()
 		return -1;
 	}
 
+	/* create empty video file */
 	if ( !(outAVFormatContext->flags & AVFMT_NOFILE) )
 	{
 	 if( avio_open2(&outAVFormatContext->pb , output_file , AVIO_FLAG_WRITE ,NULL, NULL) < 0 )
@@ -319,14 +325,13 @@ int ScreenRecorder::init_outputfile()
 	 }
 	}
 
-
-
 	if(!outAVFormatContext->nb_streams)
 	{
 		cout<<"\n\nError : Output file dose not contain any stream";
 	  return -1;
 	}
 
+	/* imp: mp4 container or some advanced container file required header information*/
 	value = avformat_write_header(outAVFormatContext , &options);
 	if(value < 0)
 	{
@@ -338,6 +343,7 @@ int ScreenRecorder::init_outputfile()
 	av_dump_format(outAVFormatContext , 0 ,output_file ,1);
 }
 
+/* driver function to run the application */
 int main()
 {
 	ScreenRecorder s_record;
