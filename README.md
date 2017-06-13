@@ -9,8 +9,11 @@ Screen recorder applications was developed using C++ FFMPEG library. Screen reco
 
 ----------
 
- Below is the sample screen shot of video screen recorder.
+Demo video @ youtube
 
+[![Watch the video](https://github.com/abdullahfarwees/screen-recorder-ffmpeg-cpp/blob/master/ffmpeg_screen.png)](https://youtu.be/a31bBY3HuxE)
+
+ Below is the sample screen shot of video screen recorder.
 
 ![alt tag](https://github.com/abdullahfarwees/screen-recorder-ffmpeg-cpp/blob/master/sample_screen_shot.png)
 
