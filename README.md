@@ -2,7 +2,7 @@
 
 Screen recorder applications was developed using C++ FFMPEG library. Screen recorder can able to capture the screen as video and store it in advanced codec of Mpeg4 and mp4 formats. 
 
-keep track and fork **restructred-codebase2** is an updated branch
+keep track and fork **restructred-codebase2** [an updated branch]
 
 > **Note:**
 
