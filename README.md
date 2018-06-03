@@ -1,5 +1,8 @@
 # screen-recorder-ffmpeg-cpp
 
+## DESCRIPTION
+**screen-recorder-ffmpeg-cpp** is an application to record a desktop (x11).
+
 Screen recorder applications was developed using C++ FFMPEG library. Screen recorder can able to capture the screen as video and store it in advanced codec of Mpeg4 and mp4 formats. 
 
 keep track and fork **master branch** [an updated branch]
