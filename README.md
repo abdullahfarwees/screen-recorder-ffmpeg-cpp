@@ -23,3 +23,5 @@ Below is the sample screen shot of video screen recorder. click the image to vie
 [1]:https://trac.ffmpeg.org/wiki/CompilationGuide
 
 ----------
+
+**If you like this project, STAR it, FORK it on Github!.**
