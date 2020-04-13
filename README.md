@@ -16,7 +16,7 @@ keep track and fork **master branch** [an updated branch]
 
 ----------
 
-Below is the sample screen shot of video screen recorder. click the image to view the demo.
+Below is the sample screen shot of video screen recorder. click the below to view the resultant video of the Screen recorder applications..
 
 [![Watch the video](https://github.com/abdullahfarwees/screen-recorder-ffmpeg-cpp/blob/master/media/sample_screen_shot.png)](https://youtu.be/a31bBY3HuxE)
  
